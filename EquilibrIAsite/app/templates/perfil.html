@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+
+{% block title %}Meu Perfil - Equilibria{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <h1>Meu Perfil</h1>
+        <p class="hero-subtitle">Gerencie suas informações e acompanhe seu progresso</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content-section">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle fa-5x text-primary"></i>
+                        </div>
+                        <h4 class="mt-3">{{ user.get_full_name|default:user.username }}</h4>
+                        <p class="text-muted">{{ user.email }}</p>
+                        <p class="text-muted">Membro desde {{ user.date_joined|date:"F Y" }}</p>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5>📊 Estatísticas</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="stat-item">
+                            <strong>Consultas Agendadas:</strong>
+                            <span class="badge bg-primary">{{ user.consulta_set.count }}</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>Conversas com IA:</strong>
+                            <span class="badge bg-info">{{ user.interacaoia_set.count }}</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>Status:</strong>
+                            <span class="badge bg-success">Ativo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>👤 Informações Pessoais</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="first_name" class="form-label">Nome</label>
+                                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.first_name }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="last_name" class="form-label">Sobrenome</label>
+                                        <input type="text" class="form-control" id="last_name" name="last_name" value="{{ user.last_name }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Nome de Usuário</label>
+                                <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" readonly>
+                                <div class="form-text">O nome de usuário não pode ser alterado.</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5>📅 Próximas Consultas</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if user.consulta_set.all %}
+                            {% for consulta in user.consulta_set.all %}
+                                <div class="consulta-item">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <h6>{{ consulta.id_psicologo.nome }}</h6>
+                                            <p class="text-muted mb-0">{{ consulta.data|date:"d/m/Y" }} às {{ consulta.horario|time:"H:i" }}</p>
+                                        </div>
+                                        <div class="col-md-4 text-end">
+                                            <span class="badge bg-{{ consulta.status|yesno:'success,warning,danger' }}">
+                                                {{ consulta.get_status_display|default:consulta.status }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-muted">Você ainda não tem consultas agendadas.</p>
+                            <a href="{% url 'agendamento' %}" class="btn btn-outline-primary">Agendar Consulta</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5>💬 Histórico de Conversas com IA</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if user.interacaoia_set.all %}
+                            <div class="chat-history">
+                                {% for interacao in user.interacaoia_set.all|slice:":5" %}
+                                    <div class="chat-item">
+                                        <div class="chat-date">{{ interacao.timestamp|date:"d/m/Y H:i" }}</div>
+                                        <div class="user-message">
+                                            <strong>Você:</strong> {{ interacao.mensagem_usuario|truncatechars:100 }}
+                                        </div>
+                                        <div class="ia-response">
+                                            <strong>IA:</strong> {{ interacao.resposta_ia|truncatechars:150 }}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                {% endfor %}
+                                {% if user.interacaoia_set.count > 5 %}
+                                    <p class="text-muted">E mais {{ user.interacaoia_set.count|add:"-5" }} conversas...</p>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <p class="text-muted">Você ainda não conversou com nossa IA.</p>
+                            <a href="{% url 'apoio_emocional' %}" class="btn btn-outline-primary">Iniciar Conversa</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.profile-avatar {
+    margin-bottom: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.stat-item:last-child {
+    border-bottom: none;
+}
+
+.consulta-item {
+    padding: 1rem 0;
+}
+
+.chat-history {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.chat-item {
+    margin-bottom: 1rem;
+}
+
+.chat-date {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.user-message {
+    background-color: #e3f2fd;
+    padding: 0.5rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+}
+
+.ia-response {
+    background-color: #f5f5f5;
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    padding: 12px 15px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-weight: 600;
+    transition: transform 0.2s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.btn-outline-primary {
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-weight: 600;
+}
+</style>
+{% endblock %}

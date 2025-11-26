@@ -1,0 +1,220 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Equilibria - Primeiros Socorros Emocionais{% endblock %}</title>
+    <!-- Incluindo Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #8dbfe4;
+            /* Azul claro para o fundo */
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: #1976d2 !important;
+            /* Azul mais forte para a navbar */
+        }
+
+        .jumbotron {
+            background: linear-gradient(135deg, #4fc3f7, #2196f3);
+            /* Gradiente azul para o jumbotron */
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-text {
+            font-weight: 300;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #1976d2;
+            margin-bottom: 15px;
+        }
+
+        .feature-box {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #1976d2;
+            border-color: #1976d2;
+        }
+
+        .btn-primary:hover {
+            background-color: #1565c0;
+            border-color: #1565c0;
+        }
+
+        footer {
+            background-color: #1976d2;
+            color: white;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        /* Estilo para a logo */
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 40px;
+            /* Ajuste o tamanho conforme necessário */
+            margin-right: 10px;
+        }
+
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #4fc3f7, #2196f3);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-weight: 300;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'logo.png' %}" alt="Logo Equilibria" class="logo-img">
+            EquilibrIA
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'sobre' %}">Sobre Nós</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'servicos' %}">Serviços</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profissionais' %}">Profissionais</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'horarios_create' %}">Horários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contato' %}">Contato</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'apoio_emocional' %}">Apoio Emocional</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'agendamento' %}">Agendamento</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'emergencias' %}">Emergências</a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin:index' %}">Administração</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-expanded="false">
+                        Olá, {{ user.first_name|default:user.username }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'perfil' %}">Meu Perfil</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-light ms-2" href="{% url 'login' %}"
+                        style="border-radius: 20px;">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary ms-2" href="{% url 'registro' %}"
+                        style="border-radius: 20px;">Cadastrar</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Equilibria</h5>
+                    <p>Seu espaço seguro para primeiros socorros emocionais com inteligência artificial.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Links Úteis</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'sobre' %}" class="text-light">Sobre Nós</a></li>
+                        <li><a href="{% url 'servicos' %}" class="text-light">Serviços</a></li>
+                        <li><a href="{% url 'contato' %}" class="text-light">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contato</h5>
+                    <p>Email: contato@equilibria.com.br<br>
+                        Telefone: (11) 9999-9999</p>
+                </div>
+            </div>
+            <hr style="background-color: rgba(255,255,255,0.3);">
+            <p>&copy; 2025 Equilibria - Todos os direitos reservados</p>
+            <p>Tecnologia a favor da sua saúde mental</p>
+        </div>
+    </footer>
+
+    <!-- Incluindo jQuery e Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

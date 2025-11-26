@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+
+{% block title %}Contato - Equilibria{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Entre em Contato</h1>
+        <p class="lead">Estamos aqui para te ajudar. Entre em contato conosco através dos canais abaixo</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Formulário de Contato -->
+        <div class="col-md-8">
+            <div class="content-section">
+                <h2>Envie sua Mensagem</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nome">Nome Completo *</label>
+                            <input type="text" class="form-control" id="nome" name="nome" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">E-mail *</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(11) 99999-9999">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="assunto">Assunto *</label>
+                            <select class="form-control" id="assunto" name="assunto" required>
+                                <option value="">Selecione um assunto</option>
+                                <option value="duvidas_gerais">Dúvidas Gerais</option>
+                                <option value="agendamento">Agendamento de Consulta</option>
+                                <option value="suporte_tecnico">Suporte Técnico</option>
+                                <option value="parceria">Parceria Profissional</option>
+                                <option value="feedback">Feedback/Sugestões</option>
+                                <option value="imprensa">Imprensa</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem *</label>
+                        <textarea class="form-control" id="mensagem" name="mensagem" rows="6" placeholder="Descreva sua dúvida, sugestão ou como podemos te ajudar..." required></textarea>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="aceito_termos" name="aceito_termos" required>
+                        <label class="form-check-label" for="aceito_termos">
+                            Aceito os <a href="#" target="_blank">Termos de Uso</a> e <a href="#" target="_blank">Política de Privacidade</a> *
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="aceito_newsletter" name="aceito_newsletter">
+                        <label class="form-check-label" for="aceito_newsletter">
+                            Desejo receber newsletters com dicas de saúde mental e novidades do Equilibria
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Informações de Contato -->
+        <div class="col-md-4">
+            <div class="content-section">
+                <h3>Informações de Contato</h3>
+                <div class="mb-4">
+                    <div class="feature-icon" style="font-size: 1.5rem;">📧</div>
+                    <h5>E-mail</h5>
+                    <p>contato@equilibria.com.br<br>
+                    <small class="text-muted">Respondemos em até 24 horas</small></p>
+                </div>
+                <div class="mb-4">
+                    <div class="feature-icon" style="font-size: 1.5rem;">📱</div>
+                    <h5>WhatsApp</h5>
+                    <p>(11) 99999-9999<br>
+                    <small class="text-muted">Segunda a sexta, 8h às 18h</small></p>
+                </div>
+                <div class="mb-4">
+                    <div class="feature-icon" style="font-size: 1.5rem;">📞</div>
+                    <h5>Telefone</h5>
+                    <p>(11) 3333-3333<br>
+                    <small class="text-muted">Segunda a sexta, 8h às 18h</small></p>
+                </div>
+                <div class="mb-4">
+                    <div class="feature-icon" style="font-size: 1.5rem;">📍</div>
+                    <h5>Endereço</h5>
+                    <p>Rua das Flores, 123<br>
+                    Vila Madalena - São Paulo/SP<br>
+                    CEP: 05435-000</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h4>Redes Sociais</h4>
+                <div class="row text-center">
+                    <div class="col-3">
+                        <a href="#" class="btn btn-outline-primary btn-sm">📘</a>
+                        <small class="d-block mt-1">Facebook</small>
+                    </div>
+                    <div class="col-3">
+                        <a href="#" class="btn btn-outline-primary btn-sm">📷</a>
+                        <small class="d-block mt-1">Instagram</small>
+                    </div>
+                    <div class="col-3">
+                        <a href="#" class="btn btn-outline-primary btn-sm">🐦</a>
+                        <small class="d-block mt-1">Twitter</small>
+                    </div>
+                    <div class="col-3">
+                        <a href="#" class="btn btn-outline-primary btn-sm">💼</a>
+                        <small class="d-block mt-1">LinkedIn</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h4>Horários de Atendimento</h4>
+                <table class="table table-sm">
+                    <tbody>
+                        <tr>
+                            <td><strong>Segunda a Sexta</strong></td>
+                            <td>8h às 18h</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sábado</strong></td>
+                            <td>9h às 14h</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Domingo</strong></td>
+                            <td>Fechado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Chat IA</strong></td>
+                            <td>24h/7 dias</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Rápido -->
+    <div class="content-section">
+        <h2 class="text-center mb-4">Perguntas Frequentes</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="feature-box">
+                    <h5>❓ Como funciona o atendimento com IA?</h5>
+                    <p>Nossa IA está disponível 24 horas por dia para oferecer suporte emocional imediato. Ela foi treinada para reconhecer sinais de angústia e oferecer técnicas de alívio, além de encaminhar para profissionais quando necessário.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-box">
+                    <h5>💰 Qual o custo dos serviços?</h5>
+                    <p>O chat com IA é gratuito. Para consultas com psicólogos, oferecemos planos a partir de R$ 49,90/mês. Consulte nossa página de serviços para mais detalhes sobre os planos disponíveis.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-box">
+                    <h5>🔒 Meus dados estão seguros?</h5>
+                    <p>Sim! Seguimos rigorosamente a LGPD e utilizamos criptografia de ponta a ponta. Todas as conversas são confidenciais e seus dados pessoais são protegidos com os mais altos padrões de segurança.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-box">
+                    <h5>⏰ Como agendar uma consulta?</h5>
+                    <p>Você pode agendar através da nossa plataforma online, escolhendo o profissional, data e horário de sua preferência. O pagamento é processado de forma segura e você recebe confirmação por e-mail.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergência -->
+    <div class="content-section text-center" style="background: linear-gradient(135deg, #ff5722, #f44336); color: white;">
+        <h2>🚨 Em Caso de Emergência</h2>
+        <p class="lead">Se você está passando por uma crise emocional ou pensamentos de autolesão, procure ajuda imediatamente.</p>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <h5>CVV - Centro de Valorização da Vida</h5>
+                <p><strong>Telefone: 188</strong><br>
+                Chat: <a href="https://www.cvv.org.br" class="text-light">cvv.org.br</a><br>
+                <small>Atendimento 24h gratuito</small></p>
+            </div>
+            <div class="col-md-4">
+                <h5>SAMU</h5>
+                <p><strong>Telefone: 192</strong><br>
+                <small>Emergências médicas</small></p>
+            </div>
+            <div class="col-md-4">
+                <h5>Polícia Militar</h5>
+                <p><strong>Telefone: 190</strong><br>
+                <small>Emergências de segurança</small></p>
+            </div>
+        </div>
+        <a href="/emergencias/" class="btn btn-light btn-lg mt-3">Botão de Emergência</a>
+    </div>
+
+    <!-- Mapa (Placeholder) -->
+    <div class="content-section">
+        <h2 class="text-center mb-4">Nossa Localização</h2>
+        <div class="row">
+            <div class="col-12">
+                <div style="height: 300px; background: #f8f9fa; border: 2px dashed #dee2e6; display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+                    <div class="text-center text-muted">
+                        <div style="font-size: 3rem;">🗺️</div>
+                        <h5>Mapa Interativo</h5>
+                        <p>Rua das Flores, 123 - Vila Madalena<br>São Paulo/SP - CEP: 05435-000</p>
+                        <small>Integração com Google Maps em desenvolvimento</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Máscara para telefone
+    const telefoneInput = document.getElementById('telefone');
+    telefoneInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length >= 11) {
+            value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+        } else if (value.length >= 7) {
+            value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+        } else if (value.length >= 3) {
+            value = value.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+        }
+        e.target.value = value;
+    });
+});
+</script>
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container mt-5">
+        <div class="jumbotron text-center">
+            <h1 class="display-4 welcome-text">Bem-vindo ao Equilibria</h1>
+            <p class="lead welcome-text">Seu espaço seguro para primeiros socorros emocionais com inteligência artificial</p>
+            <hr class="my-4" style="background-color: rgba(255,255,255,0.5);">
+            <p class="welcome-text">Estamos aqui para ouvir, acolher e te ajudar a encontrar o equilíbrio emocional.</p>
+            <a class="btn btn-primary btn-lg" href="/apoio_emocional/" role="button">Converse com nossa IA</a>
+        </div>
+
+        <!-- Seção de Funcionalidades -->
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <div class="feature-icon">💬</div>
+                    <h5>Chat com IA Empática</h5>
+                    <p>Converse com nossa inteligência artificial treinada para oferecer apoio emocional imediato e acolhimento.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <div class="feature-icon">📅</div>
+                    <h5>Agendamento Fácil</h5>
+                    <p>Marque consultas online com psicólogos parceiros de forma simples e rápida.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <div class="feature-icon">🧠</div>
+                    <h5>Ferramentas de Bem-Estar</h5>
+                    <p>Acesse exercícios de respiração, meditações e dicas de autocuidado personalizadas.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Chamada para Ação -->
+        <div class="row mt-4 mb-5">
+            <div class="col-12 text-center">
+                <h4>Precisa de ajuda agora?</h4>
+                <p>Estamos disponíveis 24 horas por dia para oferecer suporte emocional.</p>
+                <a class="btn btn-success btn-lg" href="/emergencias/" role="button">Botão de Emergência</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

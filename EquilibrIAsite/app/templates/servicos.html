@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% block title %}Serviços - Equilibria{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Nossos Serviços</h1>
+        <p class="lead">Conheça todas as formas como podemos te ajudar a cuidar da sua saúde mental</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Serviços Principais -->
+    <div class="content-section">
+        <h2 class="text-center mb-5">Serviços Principais</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="feature-box h-100">
+                    <div class="feature-icon">🤖</div>
+                    <h4>Chat com IA Empática</h4>
+                    <p>Nossa inteligência artificial foi treinada especificamente para oferecer suporte emocional. Disponível 24 horas por dia, ela pode:</p>
+                    <ul>
+                        <li>Ouvir suas preocupações sem julgamentos</li>
+                        <li>Oferecer técnicas de relaxamento e respiração</li>
+                        <li>Sugerir estratégias de enfrentamento</li>
+                        <li>Identificar quando é necessário suporte profissional</li>
+                    </ul>
+                    <a href="{% url 'apoio_emocional' %}" class="btn btn-primary">Iniciar Conversa</a>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="feature-box h-100">
+                    <div class="feature-icon">👨‍⚕️</div>
+                    <h4>Consultas com Psicólogos</h4>
+                    <p>Conectamos você com psicólogos qualificados e registrados no CRP. Oferecemos:</p>
+                    <ul>
+                        <li>Consultas online por videochamada</li>
+                        <li>Agendamento flexível</li>
+                        <li>Diferentes abordagens terapêuticas</li>
+                        <li>Acompanhamento personalizado</li>
+                    </ul>
+                    <a href="{% url 'agendamento' %}" class="btn btn-primary">Agendar Consulta</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tipos de Atendimento -->
+    <div class="content-section">
+        <h2 class="text-center mb-5">Tipos de Atendimento</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="feature-box text-center h-100">
+                    <div class="feature-icon">👤</div>
+                    <h5>Terapia Individual</h5>
+                    <p>Atendimento personalizado focado nas suas necessidades específicas. Ideal para:</p>
+                    <ul class="text-left">
+                        <li>Ansiedade e depressão</li>
+                        <li>Autoestima e autoconhecimento</li>
+                        <li>Gestão de estresse</li>
+                        <li>Traumas e lutos</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box text-center h-100">
+                    <div class="feature-icon">💑</div>
+                    <h5>Terapia de Casal</h5>
+                    <p>Fortalecimento de relacionamentos através de comunicação saudável:</p>
+                    <ul class="text-left">
+                        <li>Resolução de conflitos</li>
+                        <li>Melhoria da comunicação</li>
+                        <li>Reconstrução da confiança</li>
+                        <li>Planejamento do futuro</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box text-center h-100">
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                    <h5>Terapia Familiar</h5>
+                    <p>Harmonização das relações familiares e resolução de dinâmicas disfuncionais:</p>
+                    <ul class="text-left">
+                        <li>Conflitos entre gerações</li>
+                        <li>Problemas de comportamento</li>
+                        <li>Comunicação familiar</li>
+                        <li>Adaptação a mudanças</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recursos Adicionais -->
+    <div class="content-section">
+        <h2 class="text-center mb-5">Recursos de Bem-Estar</h2>
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="feature-box text-center h-100">
+                    <div class="feature-icon">🧘‍♀️</div>
+                    <h5>Meditações Guiadas</h5>
+                    <p>Sessões de meditação para diferentes momentos e necessidades.</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="feature-box text-center h-100">
+                    <div class="feature-icon">🫁</div>
+                    <h5>Exercícios de Respiração</h5>
+                    <p>Técnicas de respiração para controle da ansiedade e relaxamento.</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="feature-box text-center h-100">
+                    <div class="feature-icon">📝</div>
+                    <h5>Diário Emocional</h5>
+                    <p>Ferramenta para registro e acompanhamento do seu estado emocional.</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="feature-box text-center h-100">
+                    <div class="feature-icon">📚</div>
+                    <h5>Biblioteca de Recursos</h5>
+                    <p>Artigos, vídeos e materiais educativos sobre saúde mental.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Planos e Preços -->
+    <div class="content-section">
+        <h2 class="text-center mb-5">Planos e Preços</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="feature-box text-center h-100">
+                    <h4>Básico</h4>
+                    <h2 class="text-primary">Gratuito</h2>
+                    <ul class="list-unstyled">
+                        <li>✅ Chat com IA ilimitado</li>
+                        <li>✅ Exercícios de respiração</li>
+                        <li>✅ Meditações básicas</li>
+                        <li>❌ Consultas com psicólogos</li>
+                        <li>❌ Diário emocional</li>
+                    </ul>
+                    <a href="{% url 'apoio_emocional' %}" class="btn btn-outline-primary">Começar Agora</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box text-center h-100" style="border: 2px solid #1976d2;">
+                    <h4>Premium</h4>
+                    <h2 class="text-primary">R$ 49,90<small>/mês</small></h2>
+                    <ul class="list-unstyled">
+                        <li>✅ Tudo do plano Básico</li>
+                        <li>✅ 2 consultas mensais</li>
+                        <li>✅ Diário emocional</li>
+                        <li>✅ Meditações avançadas</li>
+                        <li>✅ Suporte prioritário</li>
+                    </ul>
+                    <a href="{% url 'agendamento' %}" class="btn btn-primary">Assinar Premium</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box text-center h-100">
+                    <h4>Profissional</h4>
+                    <h2 class="text-primary">R$ 99,90<small>/mês</small></h2>
+                    <ul class="list-unstyled">
+                        <li>✅ Tudo do plano Premium</li>
+                        <li>✅ Consultas ilimitadas</li>
+                        <li>✅ Terapia de casal/família</li>
+                        <li>✅ Relatórios detalhados</li>
+                        <li>✅ Acesso a especialistas</li>
+                    </ul>
+                    <a href="{% url 'agendamento' %}" class="btn btn-primary">Assinar Profissional</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergência -->
+    <div class="content-section text-center" style="background: linear-gradient(135deg, #ff5722, #f44336); color: white;">
+        <h2>Em Situação de Emergência?</h2>
+        <p class="lead">Se você está passando por uma crise emocional ou pensamentos de autolesão, procure ajuda imediatamente.</p>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h5>CVV - Centro de Valorização da Vida</h5>
+                <p><strong>Telefone: 188</strong><br>
+                Atendimento 24h gratuito</p>
+            </div>
+            <div class="col-md-6">
+                <h5>SAMU</h5>
+                <p><strong>Telefone: 192</strong><br>
+                Emergências médicas</p>
+            </div>
+        </div>
+        <a href="{% url 'emergencias' %}" class="btn btn-light btn-lg mt-3">Botão de Emergência</a>
+    </div>
+</div>
+{% endblock %}

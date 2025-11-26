@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+
+{% block title %}Profissionais - Equilibria{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Nossa Equipe</h1>
+        <p class="lead">Conheça os profissionais qualificados que fazem parte da nossa rede de cuidado</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Coordenação -->
+    <div class="content-section">
+        <h2 class="text-center mb-5">Coordenação Clínica</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="feature-box text-center">
+                    <div class="mb-3">
+                        <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #4fc3f7, #2196f3); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                            👩‍⚕️
+                        </div>
+                    </div>
+                    <h4>Dra. Ana Carolina Silva</h4>
+                    <p class="text-muted">CRP 06/123456 - Coordenadora Clínica</p>
+                    <p><strong>Especialidades:</strong> Psicologia Clínica, Terapia Cognitivo-Comportamental, Gestão de Ansiedade</p>
+                    <p><strong>Formação:</strong> Psicóloga pela USP, Especialização em TCC pelo Instituto Beck, Mestrado em Psicologia Clínica</p>
+                    <p>Com mais de 15 anos de experiência, a Dra. Ana coordena nossa equipe clínica e supervisiona todos os atendimentos realizados na plataforma.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Psicólogos Clínicos -->
+    <div class="content-section">
+        <h2 class="text-center mb-5">Psicólogos Clínicos</h2>
+        <div class="row">
+            {% for psicologo in psicologos %}
+            <div class="col-md-4 mb-4">
+                <div class="feature-box text-center h-100">
+                    <div class="mb-3">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #4fc3f7, #2196f3); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                            👨‍⚕️
+                        </div>
+                    </div>
+                    <h5>{{ psicologo.nome }}</h5>
+                    <p class="text-muted">CRP {{ psicologo.crp|default:"06/000000" }}</p>
+                    <p><strong>Especialidades:</strong> {{ psicologo.especialidades|default:"Psicologia Clínica, Terapia Individual" }}</p>
+                    <a href="/agendamento/" class="btn btn-primary btn-sm">Agendar Consulta</a>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Psicólogos de exemplo quando não há dados no banco -->
+            <div class="col-md-4 mb-4">
+                <div class="feature-box text-center h-100">
+                    <div class="mb-3">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #4fc3f7, #2196f3); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                            👨‍⚕️
+                        </div>
+                    </div>
+                    <h5>Dr. Carlos Mendes</h5>
+                    <p class="text-muted">CRP 06/234567</p>
+                    <p><strong>Especialidades:</strong> Terapia Cognitivo-Comportamental, Transtornos de Ansiedade, Depressão</p>
+                    <p><strong>Experiência:</strong> 8 anos em clínica particular e hospitalar</p>
+                    <a href="/agendamento/" class="btn btn-primary btn-sm">Agendar Consulta</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box text-center h-100">
+                    <div class="mb-3">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #4fc3f7, #2196f3); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                            👩‍⚕️
+                        </div>
+                    </div>
+                    <h5>Dra. Mariana Santos</h5>
+                    <p class="text-muted">CRP 06/345678</p>
+                    <p><strong>Especialidades:</strong> Psicologia Humanista, Terapia de Casal, Relacionamentos</p>
+                    <p><strong>Experiência:</strong> 10 anos em terapia de casal e familiar</p>
+                    <a href="/agendamento/" class="btn btn-primary btn-sm">Agendar Consulta</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box text-center h-100">
+                    <div class="mb-3">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #4fc3f7, #2196f3); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                            👨‍⚕️
+                        </div>
+                    </div>
+                    <h5>Dr. Rafael Oliveira</h5>
+                    <p class="text-muted">CRP 06/456789</p>
+                    <p><strong>Especialidades:</strong> Psicanálise, Transtornos de Personalidade, Trauma</p>
+                    <p><strong>Experiência:</strong> 12 anos em psicanálise clínica</p>
+                    <a href="/agendamento/" class="btn btn-primary btn-sm">Agendar Consulta</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box text-center h-100">
+                    <div class="mb-3">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #4fc3f7, #2196f3); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                            👩‍⚕️
+                        </div>
+                    </div>
+                    <h5>Dra. Fernanda Costa</h5>
+                    <p class="text-muted">CRP 06/567890</p>
+                    <p><strong>Especialidades:</strong> Psicologia Infantil, Adolescentes, Terapia Familiar</p>
+                    <p><strong>Experiência:</strong> 9 anos em psicologia infantil e familiar</p>
+                    <a href="/agendamento/" class="btn btn-primary btn-sm">Agendar Consulta</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box text-center h-100">
+                    <div class="mb-3">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #4fc3f7, #2196f3); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                            👨‍⚕️
+                        </div>
+                    </div>
+                    <h5>Dr. Lucas Pereira</h5>
+                    <p class="text-muted">CRP 06/678901</p>
+                    <p><strong>Especialidades:</strong> Terapia Gestalt, Autoconhecimento, Desenvolvimento Pessoal</p>
+                    <p><strong>Experiência:</strong> 7 anos em terapia gestáltica</p>
+                    <a href="/agendamento/" class="btn btn-primary btn-sm">Agendar Consulta</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box text-center h-100">
+                    <div class="mb-3">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #4fc3f7, #2196f3); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                            👩‍⚕️
+                        </div>
+                    </div>
+                    <h5>Dra. Juliana Rodrigues</h5>
+                    <p class="text-muted">CRP 06/789012</p>
+                    <p><strong>Especialidades:</strong> Neuropsicologia, Reabilitação Cognitiva, Terceira Idade</p>
+                    <p><strong>Experiência:</strong> 11 anos em neuropsicologia clínica</p>
+                    <a href="/agendamento/" class="btn btn-primary btn-sm">Agendar Consulta</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Abordagens Terapêuticas -->
+    <div class="content-section">
+        <h2 class="text-center mb-5">Abordagens Terapêuticas</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="feature-box">
+                    <h5>🧠 Terapia Cognitivo-Comportamental (TCC)</h5>
+                    <p>Abordagem focada na identificação e modificação de padrões de pensamento e comportamento que causam sofrimento. Eficaz para ansiedade, depressão e fobias.</p>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="feature-box">
+                    <h5>💭 Psicanálise</h5>
+                    <p>Exploração do inconsciente para compreender conflitos internos e padrões relacionais. Ideal para autoconhecimento profundo e resolução de traumas.</p>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="feature-box">
+                    <h5>🌱 Psicologia Humanista</h5>
+                    <p>Foco no potencial humano e crescimento pessoal. Enfatiza a experiência presente e a capacidade de autodeterminação do indivíduo.</p>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="feature-box">
+                    <h5>🎭 Terapia Gestalt</h5>
+                    <p>Abordagem que trabalha com a consciência do momento presente e a integração de aspectos fragmentados da personalidade.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Processo de Seleção -->
+    <div class="content-section">
+        <h2 class="text-center mb-5">Nosso Processo de Seleção</h2>
+        <div class="row">
+            <div class="col-md-3 text-center mb-4">
+                <div class="feature-box">
+                    <div class="feature-icon">📋</div>
+                    <h5>1. Análise Curricular</h5>
+                    <p>Verificação de formação, especializações e experiência clínica.</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="feature-box">
+                    <div class="feature-icon">🎯</div>
+                    <h5>2. Avaliação Técnica</h5>
+                    <p>Teste de conhecimentos e análise de casos clínicos.</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="feature-box">
+                    <div class="feature-icon">💬</div>
+                    <h5>3. Entrevista</h5>
+                    <p>Avaliação de habilidades interpessoais e alinhamento com nossos valores.</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="feature-box">
+                    <div class="feature-icon">📚</div>
+                    <h5>4. Capacitação</h5>
+                    <p>Treinamento em nossa metodologia e ferramentas digitais.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quer fazer parte? -->
+    <div class="content-section text-center">
+        <h2>Quer fazer parte da nossa equipe?</h2>
+        <p class="lead">Estamos sempre em busca de profissionais qualificados e comprometidos com a saúde mental.</p>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h5>Requisitos Mínimos</h5>
+                <ul class="text-left">
+                    <li>Graduação em Psicologia</li>
+                    <li>Registro ativo no CRP</li>
+                    <li>Experiência clínica mínima de 2 anos</li>
+                    <li>Disponibilidade para atendimento online</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h5>Diferenciais</h5>
+                <ul class="text-left">
+                    <li>Especializações reconhecidas</li>
+                    <li>Experiência com terapia online</li>
+                    <li>Conhecimento em tecnologia</li>
+                    <li>Fluência em outros idiomas</li>
+                </ul>
+            </div>
+        </div>
+        <a href="{% url 'contato' %}" class="btn btn-primary btn-lg mt-4">Envie seu Currículo</a>
+    </div>
+</div>
+{% endblock %}

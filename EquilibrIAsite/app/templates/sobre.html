@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}Sobre Nós - Equilibria{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Sobre Nós</h1>
+        <p class="lead">Conheça nossa missão, valores e abordagem no cuidado da saúde mental</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content-section">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Nossa Missão</h2>
+                <p>O Equilibria nasceu da necessidade de democratizar o acesso aos primeiros socorros emocionais. Acreditamos que todos merecem ter um espaço seguro para expressar seus sentimentos e receber apoio quando mais precisam.</p>
+                
+                <p>Nossa plataforma combina tecnologia de inteligência artificial com a expertise de profissionais qualificados para oferecer suporte emocional imediato e encaminhamento para atendimento especializado quando necessário.</p>
+
+                <h3>Nossos Valores</h3>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="feature-box">
+                            <div class="feature-icon">🤝</div>
+                            <h5>Empatia</h5>
+                            <p>Cada interação é pautada pela compreensão e acolhimento genuíno das emoções humanas.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-box">
+                            <div class="feature-icon">🔒</div>
+                            <h5>Privacidade</h5>
+                            <p>Garantimos total confidencialidade e segurança de todas as informações compartilhadas.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-box">
+                            <div class="feature-icon">⚡</div>
+                            <h5>Acessibilidade</h5>
+                            <p>Disponível 24 horas por dia, 7 dias por semana, para quando você mais precisar.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-box">
+                            <div class="feature-icon">🎯</div>
+                            <h5>Qualidade</h5>
+                            <p>Comprometimento com a excelência no atendimento e melhoria contínua dos serviços.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <h4>Nossa Abordagem</h4>
+                    <p>Utilizamos uma combinação de:</p>
+                    <ul class="list-unstyled">
+                        <li><strong>🤖 IA Empática:</strong> Tecnologia treinada para reconhecer e responder adequadamente às necessidades emocionais</li>
+                        <li><strong>👥 Suporte Humano:</strong> Psicólogos qualificados disponíveis para casos que necessitam intervenção profissional</li>
+                        <li><strong>📚 Recursos Educativos:</strong> Conteúdo especializado para promover o autoconhecimento e bem-estar</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-box text-center mt-4">
+                    <h4>Estatísticas</h4>
+                    <div class="row">
+                        <div class="col-6">
+                            <h3 class="text-primary">24/7</h3>
+                            <small>Disponibilidade</small>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="text-primary">100%</h3>
+                            <small>Confidencial</small>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <h3 class="text-primary">+1000</h3>
+                            <small>Pessoas Ajudadas</small>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="text-primary">15+</h3>
+                            <small>Profissionais</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2>Nossa História</h2>
+                <p class="lead">O Equilibria foi fundado em 2025 por uma equipe multidisciplinar de psicólogos, desenvolvedores e pesquisadores em inteligência artificial.</p>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4 text-center">
+                <div class="feature-box">
+                    <h4>2024</h4>
+                    <h5>Fundação</h5>
+                    <p>Início do projeto com foco em primeiros socorros emocionais digitais.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="feature-box">
+                    <h4>2024</h4>
+                    <h5>Lançamento Beta</h5>
+                    <p>Primeira versão da plataforma com IA básica para suporte emocional.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="feature-box">
+                    <h4>2025</h4>
+                    <h5>Expansão</h5>
+                    <p>Integração com rede de psicólogos e novos recursos de bem-estar.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section text-center">
+        <h2>Pronto para começar?</h2>
+        <p class="lead">Estamos aqui para te ajudar a encontrar o equilíbrio emocional que você merece.</p>
+        <a href="{% url 'apoio_emocional' %}" class="btn btn-primary btn-lg mr-3">Conversar com IA</a>
+        <a href="{% url 'contato' %}" class="btn btn-outline-primary btn-lg">Entre em Contato</a>
+    </div>
+</div>
+{% endblock %}

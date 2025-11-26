@@ -1,0 +1,332 @@
+{% extends 'base.html' %}
+
+{% block title %}🚨 Emergência Psicológica - Equilibria{% endblock %}
+
+{% block extra_css %}
+<style>
+    .emergency-hero {
+        background: linear-gradient(135deg, #d32f2f, #b71c1c);
+        color: white;
+        padding: 3rem 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .emergency-hero h1 {
+        font-weight: 700;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .emergency-hero p.lead {
+        font-size: 1.3rem;
+        max-width: 800px;
+        margin: 0 auto 1.5rem;
+        opacity: 0.95;
+    }
+
+    .emergency-btn {
+        background: white !important;
+        color: #d32f2f !important;
+        font-weight: bold;
+        font-size: 1.2rem;
+        padding: 0.9rem 2rem;
+        border-radius: 50px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .emergency-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        background: #f5f5f5 !important;
+    }
+
+    .emergency-btn i {
+        font-size: 1.4rem;
+    }
+
+    .support-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .support-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.8rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-top: 4px solid #4fc3f7;
+    }
+
+    .support-card.danger {
+        border-top-color: #f44336;
+    }
+
+    .support-card.warning {
+        border-top-color: #ff9800;
+    }
+
+    .support-card.success {
+        border-top-color: #4caf50;
+    }
+
+    .support-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .support-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .support-card.danger .support-icon { color: #f44336; }
+    .support-card.warning .support-icon { color: #ff9800; }
+    .support-card.success .support-icon { color: #4caf50; }
+
+    .support-card h5 {
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        color: #333;
+    }
+
+    .support-card p {
+        color: #555;
+        font-size: 0.95rem;
+    }
+
+    .hotline-list {
+        list-style: none;
+        padding: 0;
+        margin: 1.5rem 0;
+    }
+
+    .hotline-item {
+        background: #fff8e1;
+        padding: 1.2rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-left: 4px solid #ff9800;
+    }
+
+    .hotline-number {
+        font-weight: bold;
+        font-size: 1.4rem;
+        color: #d32f2f;
+    }
+
+    .calm-section {
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-top: 2.5rem;
+        text-align: center;
+    }
+
+    .calm-section h3 {
+        color: #2e7d32;
+        margin-bottom: 1.2rem;
+    }
+
+    .grounding-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 600px;
+        margin: 1.5rem auto 0;
+    }
+
+    .step {
+        text-align: left;
+        padding: 1.2rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .step-number {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: #4caf50;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 32px;
+        font-weight: bold;
+        margin-right: 12px;
+    }
+
+    .final-note {
+        background: #f5f5f5;
+        border-left: 4px solid #2196f3;
+        padding: 1.2rem;
+        border-radius: 0 8px 8px 0;
+        margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .emergency-hero {
+            padding: 2rem 1rem;
+        }
+        .emergency-hero h1 {
+            font-size: 1.8rem;
+        }
+        .emergency-btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="emergency-hero">
+        <h1>🚨 Você não está sozinho(a)</h1>
+        <p class="lead">Se estiver em crise emocional, com pensamentos de autolesão ou suicídio, <strong>procure ajuda agora</strong>. Sua vida importa.</p>
+        <a href="tel:188" class="btn emergency-btn">
+            <i>☎️</i> Ligue para o CVV <strong>188</strong> (24h, gratuito)
+        </a>
+    </div>
+
+    <!-- Linhas de Apoio Imediato -->
+    <div class="content-section">
+        <h2 class="text-center mb-4">📞 Linhas de Apoio Imediato</h2>
+        <ul class="hotline-list">
+            <li class="hotline-item">
+                <div>
+                    <h5>CVV – Centro de Valorização da Vida</h5>
+                    <p>Atendimento emocional gratuito e confidencial, 24h</p>
+                </div>
+                <div class="hotline-number">188</div>
+            </li>
+            <li class="hotline-item">
+                <div>
+                    <h5>SAMU</h5>
+                    <p>Emergência médica (inclui crises agudas)</p>
+                </div>
+                <div class="hotline-number">192</div>
+            </li>
+            <li class="hotline-item">
+                <div>
+                    <h5>Disque Saúde</h5>
+                    <p>Orientação em saúde mental e encaminhamentos</p>
+                </div>
+                <div class="hotline-number">136</div>
+            </li>
+        </ul>
+
+        <div class="text-center mt-3">
+            <p class="text-muted">
+                <small>✅ Ligações gratuitas de todo o Brasil | Atendimento por psicólogos e voluntários treinados</small>
+            </p>
+        </div>
+    </div>
+
+    <!-- Níveis de Apoio -->
+    <div class="support-grid">
+        <div class="support-card danger">
+            <div class="support-icon">⚠️</div>
+            <h5>Crise Aguda</h5>
+            <p>Se houver risco imediato de suicídio ou violência, <strong>ligue 192 (SAMU)</strong> ou vá ao pronto-socorro mais próximo.</p>
+        </div>
+
+        <div class="support-card warning">
+            <div class="support-icon">💬</div>
+            <h5>Apoio Emocional</h5>
+            <p>Fale com o CVV (188), via ligação, chat ou e-mail. Voluntários treinados estão prontos para ouvir, sem julgamento.</p>
+        </div>
+
+        <div class="support-card success">
+            <div class="support-icon">🌱</div>
+            <h5>Continuidade do Cuidado</h5>
+            <p>Após a crise, agende uma avaliação com um profissional. Estamos aqui para apoiar sua jornada de cura.</p>
+        </div>
+    </div>
+
+    <!-- Técnica de Grounding (5-4-3-2-1) -->
+    <div class="calm-section">
+        <h3>🌬️ Enquanto espera ajuda: Técnica de Grounding 5-4-3-2-1</h3>
+        <p class="mb-3">Esta prática simples ajuda a trazer você de volta ao <strong>momento presente</strong> e reduzir a intensidade da crise.</p>
+
+        <div class="grounding-steps">
+            <div class="step">
+                <span class="step-number">5</span>
+                <strong>Olhe ao redor</strong> e nomeie <em>5 coisas que você vê</em> (ex: uma janela, um livro, uma planta).
+            </div>
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Sinta</strong> <em>4 coisas que você toca</em> (ex: suas roupas, o chão, o celular, seu cabelo).
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Ouça</strong> <em>3 sons</em> ao seu redor (ex: o ventilador, pássaros, sua respiração).
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Identifique</strong> <em>2 cheiros</em> (ou 2 aromas que você gosta).
+            </div>
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Sinta</strong> <em>1 sabor</em> na boca (água, bala, ou só sua própria boca).
+            </div>
+        </div>
+
+        <p class="mt-3">
+            <small>💡 Repita quantas vezes precisar. Respirar fundo entre cada passo ajuda ainda mais.</small>
+        </p>
+    </div>
+
+    <!-- Encerramento acolhedor -->
+    <div class="final-note">
+        <p>
+            <strong>Importante:</strong> Passar por uma crise não significa fraqueza. Significa que você carregou muito por muito tempo — e agora merece apoio.  
+            O Equilibria está com você, antes, durante e depois da tempestade.
+        </p>
+        <div class="mt-3">
+            <a href="{% url 'apoio_emocional' %}" class="btn btn-outline-primary btn-sm me-2">
+                ↩️ Voltar ao Apoio com IA
+            </a>
+            <a href="{% url 'agendamento' %}" class="btn btn-success btn-sm">
+                📅 Agendar com Profissional
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Auto-focus no botão principal (acessibilidade)
+document.addEventListener('DOMContentLoaded', () => {
+    const cvvBtn = document.querySelector('.emergency-btn');
+    if (cvvBtn) {
+        cvvBtn.focus();
+    }
+    
+    // Alerta extra (opcional): se o usuário tentar sair sem agir, reforçar ajuda
+    // ⚠️ Use com cuidado – só em ambientes controlados e com consentimento implícito
+
+    window.addEventListener('beforeunload', function (e) {
+        if (performance.navigation.type === 1) return; // reload
+        e.preventDefault();
+        e.returnValue = 'Você está em uma página de emergência. Tem certeza que deseja sair?';
+    })
+
+});
+</script>
+{% endblock %}

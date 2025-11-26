@@ -1,0 +1,440 @@
+{% extends 'base.html' %}
+
+{% block title %}Apoio Emocional - Equilibria{% endblock %}
+
+{% block extra_css %}
+<style>
+    .chat-container {
+        height: 500px;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        overflow-y: auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+    }
+    
+    .message {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .message.user {
+        justify-content: flex-end;
+    }
+    
+    .message.ai {
+        justify-content: flex-start;
+    }
+    
+    .message-bubble {
+        max-width: 70%;
+        padding: 12px 16px;
+        border-radius: 18px;
+        word-wrap: break-word;
+    }
+    
+    .message.user .message-bubble {
+        background-color: #1976d2;
+        color: white;
+        margin-left: 10px;
+    }
+    
+    .message.ai .message-bubble {
+        background-color: white;
+        color: #333;
+        border: 1px solid #dee2e6;
+        margin-right: 10px;
+    }
+    
+    .message-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+    
+    .message.user .message-avatar {
+        background: linear-gradient(135deg, #4fc3f7, #2196f3);
+        color: white;
+    }
+    
+    .message.ai .message-avatar {
+        background: linear-gradient(135deg, #66bb6a, #4caf50);
+        color: white;
+    }
+    
+    .typing-indicator {
+        display: none;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    
+    .typing-dots {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        background-color: white;
+        border: 1px solid #dee2e6;
+        border-radius: 18px;
+        margin-right: 10px;
+    }
+    
+    .typing-dots span {
+        height: 8px;
+        width: 8px;
+        background-color: #999;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0 2px;
+        animation: typing 1.4s infinite ease-in-out;
+    }
+    
+    .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+    
+    @keyframes typing {
+        0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+        40% { transform: scale(1); opacity: 1; }
+    }
+    
+    .chat-input-container {
+        border-top: 1px solid #dee2e6;
+        padding: 20px;
+        background-color: white;
+        border-radius: 0 0 10px 10px;
+    }
+    
+    .quick-responses {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .quick-response-btn {
+        background-color: #e3f2fd;
+        border: 1px solid #1976d2;
+        color: #1976d2;
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .quick-response-btn:hover {
+        background-color: #1976d2;
+        color: white;
+    }
+    
+    .emergency-banner {
+        background: linear-gradient(135deg, #f03030, #f74a3e);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .wellness-tips {
+        background: linear-gradient(135deg, #4fc3f7, #2196f3);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Apoio Emocional com IA</h1>
+        <p class="lead">Converse com nossa inteligência artificial treinada para oferecer suporte emocional</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Banner de Emergência -->
+    <div class="emergency-banner">
+        <h5>🚨 Em caso de emergência ou pensamentos de autolesão</h5>
+        <p class="mb-2">Procure ajuda profissional imediatamente: CVV 188 | SAMU 192</p>
+        <a href="/emergencia/" class="btn btn-light btn-sm">Botão de Emergência</a>
+    </div>
+
+    <div class="row">
+        <!-- Chat Principal -->
+        <div class="col-md-8">
+            <div class="content-section p-0">
+                <div class="chat-container" id="chatContainer">
+                    <div class="message ai">
+                        <div class="message-avatar">🤖</div>
+                        <div class="message-bubble">
+                            <p>Olá! Eu sou a IA do Equilibria. Estou aqui para te ouvir e oferecer suporte emocional. Como você está se sentindo hoje?</p>
+                            <small class="text-muted">Agora</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Indicador de digitação -->
+                    <div class="typing-indicator" id="typingIndicator">
+                        <div class="message-avatar" style="background: linear-gradient(135deg, #66bb6a, #4caf50); color: white;">🤖</div>
+                        <div class="typing-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <!-- Respostas Rápidas -->
+                    <div class="quick-responses" id="quickResponses">
+                        <button class="quick-response-btn" onclick="sendQuickResponse('Estou me sentindo ansioso')">😰 Estou ansioso</button>
+                        <button class="quick-response-btn" onclick="sendQuickResponse('Me sinto triste hoje')">😔 Estou triste</button>
+                        <button class="quick-response-btn" onclick="sendQuickResponse('Estou estressado com o trabalho')">😤 Estou estressado</button>
+                        <button class="quick-response-btn" onclick="sendQuickResponse('Preciso de técnicas de relaxamento')">🧘‍♀️ Quero relaxar</button>
+                    </div>
+                    
+                    <form id="chatForm">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="messageInput" name="mensagem" placeholder="Digite sua mensagem..." autocomplete="off">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit" id="sendButton">
+                                    <span id="sendIcon">📤</span>
+                                    <span id="sendText">Enviar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Painel Lateral -->
+        <div class="col-md-4">
+            <div class="content-section">
+                <h4>💡 Dicas de Uso</h4>
+                <ul class="list-unstyled">
+                    <li><strong>🔒 Confidencial:</strong> Suas conversas são privadas e seguras</li>
+                    <li><strong>⏰ Disponível 24h:</strong> Estou sempre aqui quando precisar</li>
+                    <li><strong>🎯 Seja específico:</strong> Quanto mais detalhes, melhor posso ajudar</li>
+                    <li><strong>👥 Suporte humano:</strong> Posso te conectar com profissionais quando necessário</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h4>🛠️ Ferramentas Disponíveis</h4>
+                <div class="list-group list-group-flush">
+                    <button class="list-group-item list-group-item-action" onclick="requestBreathingExercise()">
+                        🫁 Exercício de Respiração
+                    </button>
+                    <button class="list-group-item list-group-item-action" onclick="requestMeditation()">
+                        🧘‍♀️ Meditação Guiada
+                    </button>
+                    <button class="list-group-item list-group-item-action" onclick="requestGroundingTechnique()">
+                        🌱 Técnica de Grounding
+                    </button>
+                    <button class="list-group-item list-group-item-action" onclick="requestPositiveAffirmations()">
+                        ✨ Afirmações Positivas
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h4>📊 Seu Bem-Estar</h4>
+                <p>Como você avalia seu estado emocional hoje?</p>
+                <div class="btn-group-vertical btn-group-sm w-100" role="group">
+                    <button type="button" class="btn btn-outline-success" onclick="recordMood('excelente')">😊 Excelente</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="recordMood('bom')">🙂 Bom</button>
+                    <button type="button" class="btn btn-outline-warning" onclick="recordMood('regular')">😐 Regular</button>
+                    <button type="button" class="btn btn-outline-danger" onclick="recordMood('ruim')">😔 Ruim</button>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h4>🔗 Recursos Adicionais</h4>
+                <div class="list-group list-group-flush">
+                    <a href="{% url 'agendamento' %}" class="list-group-item list-group-item-action">
+                        📅 Agendar Consulta
+                    </a>
+                    <a href="{% url 'blog' %}" class="list-group-item list-group-item-action">
+                        📚 Artigos sobre Saúde Mental
+                    </a>
+                    <a href="{% url 'contato' %}" class="list-group-item list-group-item-action">
+                        💬 Falar com Humano
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dicas de Bem-Estar -->
+    <div class="wellness-tips">
+        <h3>💚 Dica de Bem-Estar do Dia</h3>
+        <p id="dailyTip">Pratique a gratidão: liste 3 coisas pelas quais você é grato hoje. Isso pode melhorar significativamente seu humor e perspectiva.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let chatContainer = document.getElementById('chatContainer');
+let messageInput = document.getElementById('messageInput');
+let chatForm = document.getElementById('chatForm');
+let typingIndicator = document.getElementById('typingIndicator');
+let sendButton = document.getElementById('sendButton');
+
+// Focar no input ao carregar a página
+messageInput.focus();
+
+// Enviar mensagem
+chatForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    sendMessage();
+});
+
+function sendMessage() {
+    const message = messageInput.value.trim();
+    if (!message) return;
+    
+    // Adicionar mensagem do usuário
+    addMessage(message, 'user');
+    
+    // Limpar input
+    messageInput.value = '';
+    
+    // Mostrar indicador de digitação
+    showTypingIndicator();
+    
+    // Desabilitar botão de envio
+    sendButton.disabled = true;
+    
+    // Enviar para o servidor
+    fetch('{% url "apoio_emocional" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        },
+        body: 'mensagem=' + encodeURIComponent(message)
+    })
+    .then(response => response.json())
+    .then(data => {
+        hideTypingIndicator();
+        if (data.resposta) {
+            addMessage(data.resposta, 'ai');
+        } else if (data.error) {
+            addMessage('Desculpe, ocorreu um erro. Tente novamente.', 'ai');
+        }
+        sendButton.disabled = false;
+        messageInput.focus();
+    })
+    .catch(error => {
+        hideTypingIndicator();
+        addMessage('Desculpe, não consegui processar sua mensagem. Verifique sua conexão.', 'ai');
+        sendButton.disabled = false;
+        messageInput.focus();
+    });
+}
+
+function addMessage(text, sender) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender}`;
+    
+    const avatar = document.createElement('div');
+    avatar.className = 'message-avatar';
+    avatar.textContent = sender === 'user' ? '👤' : '🤖';
+    
+    const bubble = document.createElement('div');
+    bubble.className = 'message-bubble';
+    bubble.innerHTML = `<p>${text}</p><small class="text-muted">Agora</small>`;
+    
+    if (sender === 'user') {
+        messageDiv.appendChild(bubble);
+        messageDiv.appendChild(avatar);
+    } else {
+        messageDiv.appendChild(avatar);
+        messageDiv.appendChild(bubble);
+    }
+    
+    chatContainer.appendChild(messageDiv);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+function showTypingIndicator() {
+    typingIndicator.style.display = 'flex';
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+function hideTypingIndicator() {
+    typingIndicator.style.display = 'none';
+}
+
+function sendQuickResponse(message) {
+    messageInput.value = message;
+    sendMessage();
+}
+
+function requestBreathingExercise() {
+    sendQuickResponse('Preciso de um exercício de respiração para me acalmar');
+}
+
+function requestMeditation() {
+    sendQuickResponse('Gostaria de uma meditação guiada');
+}
+
+function requestGroundingTechnique() {
+    sendQuickResponse('Preciso de uma técnica de grounding para me conectar com o presente');
+}
+
+function requestPositiveAffirmations() {
+    sendQuickResponse('Gostaria de algumas afirmações positivas');
+}
+
+function recordMood(mood) {
+    const moodMessages = {
+        'excelente': 'Que ótimo saber que você está se sentindo excelente hoje!',
+        'bom': 'Fico feliz em saber que você está se sentindo bem!',
+        'regular': 'Entendo que você está se sentindo regular. Quer conversar sobre isso?',
+        'ruim': 'Sinto muito que você não esteja se sentindo bem. Estou aqui para te ajudar.'
+    };
+    
+    addMessage(moodMessages[mood], 'ai');
+    
+    // Aqui você pode salvar o humor no backend se necessário
+    console.log('Humor registrado:', mood);
+}
+
+// Dicas de bem-estar rotativas
+const wellnessTips = [
+    "Pratique a gratidão: liste 3 coisas pelas quais você é grato hoje. Isso pode melhorar significativamente seu humor e perspectiva.",
+    "Faça uma pausa de 5 minutos para respirar profundamente. A respiração consciente reduz o estresse e aumenta a clareza mental.",
+    "Conecte-se com a natureza, mesmo que seja apenas observando o céu pela janela. Isso pode reduzir a ansiedade e melhorar o humor.",
+    "Pratique o autocuidado: tome um banho relaxante, ouça sua música favorita ou faça algo que te traga alegria.",
+    "Limite o tempo nas redes sociais se estiver se sentindo sobrecarregado. Às vezes, um detox digital faz maravilhas.",
+    "Mantenha-se hidratado e alimente-se bem. Nosso estado físico influencia diretamente nosso bem-estar emocional.",
+    "Pratique a autocompaixão: trate-se com a mesma gentileza que trataria um bom amigo."
+];
+
+// Trocar dica a cada 30 segundos
+let tipIndex = 0;
+setInterval(() => {
+    tipIndex = (tipIndex + 1) % wellnessTips.length;
+    document.getElementById('dailyTip').textContent = wellnessTips[tipIndex];
+}, 30000);
+
+// Permitir envio com Enter
+messageInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Horários Disponíveis - Equilibria{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Horários Disponíveis</h1>
+        <p class="lead">Veja os horários em que nossos psicólogos estão disponíveis para atendimento</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content-section">
+        {% if psicologos_com_horarios %}
+            {% for psicologo in psicologos_com_horarios %}
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">{{ psicologo.nome }} 
+                        <small class="text-white-50">(CRP: {{ psicologo.crp }})</small>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    {% if psicologo.horarios_por_dia %}
+                        {% for dia_numero, horarios in psicologo.horarios_por_dia.items %}
+                            {% if horarios %}
+                                <h5 class="mt-3">
+                                    {% if dia_numero == 0 %}Segunda-feira
+                                    {% elif dia_numero == 1 %}Terça-feira
+                                    {% elif dia_numero == 2 %}Quarta-feira
+                                    {% elif dia_numero == 3 %}Quinta-feira
+                                    {% elif dia_numero == 4 %}Sexta-feira
+                                    {% elif dia_numero == 5 %}Sábado
+                                    {% elif dia_numero == 6 %}Domingo
+                                    {% endif %}
+                                </h5>
+                                <div class="row">
+                                    {% for h in horarios %}
+                                    <div class="col-md-3 col-sm-6 mb-2">
+                                        <div class="badge badge-light border p-2 w-100 text-center">
+                                            {{ h.hora_inicio|time:"H:i" }} – {{ h.hora_fim|time:"H:i" }}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted">Nenhum horário disponível no momento.</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info text-center">
+                <h5>Nenhum psicólogo com horários disponíveis no momento.</h5>
+                <p>Volte em breve ou entre em contato para mais informações.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'agendamento' %}" class="btn btn-primary">Agendar Consulta</a>
+        <a href="{% url 'contato' %}" class="btn btn-outline-secondary">Falar com Atendimento</a>
+    </div>
+</div>
+{% endblock %}

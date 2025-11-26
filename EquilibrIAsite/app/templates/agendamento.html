@@ -1,0 +1,294 @@
+{% extends 'base.html' %}
+
+{% block title %}Agendamento - Equilibria{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Agendar Consulta</h1>
+        <p class="lead">Escolha o profissional, data e horário que melhor se adequam à sua agenda</p>
+    </div>
+</div>
+
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="content-section">
+                <h2>Dados do Agendamento</h2>
+                
+                {% if not user.is_authenticated %}
+                    <div class="alert alert-warning">
+                        <h5>⚠️ Login Necessário</h5>
+                        <p>Para agendar uma consulta, você precisa estar logado em sua conta.</p>
+                        <a href="/login/" class="btn btn-primary">Fazer Login</a>
+                        <a href="/registro/" class="btn btn-outline-primary ml-2">Criar Conta</a>
+                    </div>
+                {% else %}
+                    <form method="post" id="agendamentoForm">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="psicologo">Escolha o Psicólogo *</label>
+                            <select class="form-control" id="psicologo" name="psicologo" required>
+                                <option value="">Selecione um profissional</option>
+                                {% for psicologo in psicologos %}
+                                    <option value="{{ psicologo.id }}">{{ psicologo.nome }}</option>
+                                {% empty %}
+                                    <option value="1">Dra. Ana Carolina Silva - Coordenadora Clínica</option>
+                                    <option value="2">Dr. Carlos Mendes - TCC e Ansiedade</option>
+                                    <option value="3">Dra. Mariana Santos - Terapia de Casal</option>
+                                    <option value="4">Dr. Rafael Oliveira - Psicanálise</option>
+                                    <option value="5">Dra. Fernanda Costa - Psicologia Infantil</option>
+                                    <option value="6">Dr. Lucas Pereira - Terapia Gestalt</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="data">Data da Consulta *</label>
+                                <input type="date" class="form-control" id="data" name="data" required min="{{ today }}">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="horario">Horário *</label>
+                                <select class="form-control" id="horario" name="horario" required>
+                                    <option value="">Selecione um horário</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="17:00">17:00</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="19:00">19:00</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tipo_consulta">Tipo de Consulta</label>
+                            <select class="form-control" id="tipo_consulta" name="tipo_consulta">
+                                <option value="individual">Terapia Individual</option>
+                                <option value="casal">Terapia de Casal</option>
+                                <option value="familiar">Terapia Familiar</option>
+                                <option value="primeira_vez">Primeira Consulta</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="observacoes">Observações (Opcional)</label>
+                            <textarea class="form-control" id="observacoes" name="observacoes" rows="3" placeholder="Descreva brevemente o motivo da consulta ou alguma informação importante..."></textarea>
+                        </div>
+
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="aceito_termos" name="aceito_termos" required>
+                            <label class="form-check-label" for="aceito_termos">
+                                Aceito os <a href="#" target="_blank">Termos de Uso</a> e <a href="#" target="_blank">Política de Privacidade</a> *
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg">Confirmar Agendamento</button>
+                        <a href="{% url 'home' %}" class="btn btn-outline-secondary btn-lg ml-2">Cancelar</a>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Informações Laterais -->
+        <div class="col-md-4">
+            <div class="content-section">
+                <h4>💡 Como Funciona</h4>
+                <ol>
+                    <li><strong>Escolha o Profissional:</strong> Selecione o psicólogo que melhor atende suas necessidades</li>
+                    <li><strong>Defina Data e Horário:</strong> Escolha um horário disponível em nossa agenda</li>
+                    <li><strong>Confirmação:</strong> Você receberá um e-mail de confirmação com os detalhes</li>
+                    <li><strong>Consulta Online:</strong> Acesse a videochamada no horário agendado</li>
+                </ol>
+            </div>
+
+            <div class="content-section">
+                <h4>📋 Informações Importantes</h4>
+                <ul class="list-unstyled">
+                    <li><strong>⏰ Duração:</strong> 50 minutos por sessão</li>
+                    <li><strong>💻 Modalidade:</strong> Online via videochamada</li>
+                    <li><strong>🔄 Reagendamento:</strong> Até 24h antes da consulta</li>
+                    <li><strong>💳 Pagamento:</strong> Processado após confirmação</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h4>💰 Valores</h4>
+                <table class="table table-sm">
+                    <tbody>
+                        <tr>
+                            <td>Primeira Consulta</td>
+                            <td><strong>R$ 80,00</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Consulta Individual</td>
+                            <td><strong>R$ 120,00</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Terapia de Casal</td>
+                            <td><strong>R$ 150,00</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Terapia Familiar</td>
+                            <td><strong>R$ 180,00</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <small class="text-muted">*Valores para consultas avulsas. Planos mensais com desconto disponíveis.</small>
+            </div>
+
+            <div class="content-section">
+                <h4>📞 Precisa de Ajuda?</h4>
+                <p>Nossa equipe está disponível para esclarecer dúvidas sobre agendamentos.</p>
+                <a href="{% url 'contato' %}" class="btn btn-outline-primary btn-sm">Entre em Contato</a>
+                <hr>
+                <p><strong>WhatsApp:</strong> (11) 99999-9999<br>
+                <strong>E-mail:</strong> agendamento@equilibria.com.br</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Próximas Consultas (se usuário logado) -->
+    {% if user.is_authenticated %}
+    <div class="content-section">
+        <h2>Suas Próximas Consultas</h2>
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Horário</th>
+                                <th>Profissional</th>
+                                <th>Tipo</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Aqui você pode iterar sobre as consultas do usuário -->
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">
+                                    Nenhuma consulta agendada no momento.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Depoimentos -->
+    <div class="content-section">
+        <h2 class="text-center mb-4">O que nossos pacientes dizem</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <div class="mb-3">
+                        <div style="color: #ffc107; font-size: 1.5rem;">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p><em>"O agendamento é muito fácil e os profissionais são excelentes. Me sinto muito acolhida nas consultas."</em></p>
+                    <small><strong>Maria S.</strong> - Paciente há 6 meses</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <div class="mb-3">
+                        <div style="color: #ffc107; font-size: 1.5rem;">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p><em>"A terapia online funcionou muito melhor do que eu esperava. Super recomendo o Equilibria."</em></p>
+                    <small><strong>João P.</strong> - Paciente há 1 ano</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <div class="mb-3">
+                        <div style="color: #ffc107; font-size: 1.5rem;">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p><em>"Encontrei o equilíbrio que precisava. A equipe é muito profissional e acolhedora."</em></p>
+                    <small><strong>Ana L.</strong> - Paciente há 8 meses</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Definir data mínima como hoje
+    const dataInput = document.getElementById('data');
+    const hoje = new Date().toISOString().split('T')[0];
+    dataInput.min = hoje;
+    
+    // Validação do formulário
+    const form = document.getElementById('agendamentoForm');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            const data = document.getElementById('data').value;
+            const horario = document.getElementById('horario').value;
+            const psicologo = document.getElementById('psicologo').value;
+            
+            if (!data || !horario || !psicologo) {
+                e.preventDefault();
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return false;
+            }
+            
+            // Verificar se a data não é no passado
+            const dataSelecionada = new Date(data);
+            const hoje = new Date();
+            hoje.setHours(0, 0, 0, 0);
+            
+            if (dataSelecionada < hoje) {
+                e.preventDefault();
+                alert('Não é possível agendar consultas para datas passadas.');
+                return false;
+            }
+            
+            // Verificar se não é domingo
+            if (dataSelecionada.getDay() === 0) {
+                e.preventDefault();
+                alert('Não atendemos aos domingos. Por favor, escolha outro dia.');
+                return false;
+            }
+            
+            return true;
+        });
+    }
+    
+    // Atualizar horários disponíveis baseado no profissional selecionado
+    const psicologoSelect = document.getElementById('psicologo');
+    const horarioSelect = document.getElementById('horario');
+    
+    if (psicologoSelect && horarioSelect) {
+        psicologoSelect.addEventListener('change', function() {
+            // Aqui você pode implementar lógica para mostrar apenas horários disponíveis
+            // para o profissional selecionado
+            console.log('Profissional selecionado:', this.value);
+        });
+    }
+});
+</script>
+{% endblock %}
+{% endblock %}
